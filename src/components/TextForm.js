@@ -36,7 +36,7 @@ export default function TextForm(props) {
         setText(event.target.value)
     }
 
-    let wordCount = Text.split(" ").length
+    let wordCount = Text.split(" ").filter((e)=>{return e.length!==0}).length
 
     return (
         <>
