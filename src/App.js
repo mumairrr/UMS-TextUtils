@@ -1,4 +1,5 @@
 import './App.css';
+import logo from './UMS-Logo.png';
 import React, { useState } from 'react';
 import Navbar from './components/Navbar';
 import TextForm from './components/TextForm';
@@ -39,7 +40,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
-      <Navbar title="UMS.TextUtlity" mode={mode} toggleMode={toggleMode} />
+      <Navbar title="UMS.TextUtlity" mode={mode} toggleMode={toggleMode} logo={logo}/>
       <Alert alert={alert} />
         <Routes>
           < Route path="/"

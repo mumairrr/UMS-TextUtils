@@ -21,6 +21,7 @@ export default function TextForm(props) {
         let text = document.getElementById("textBox")
         text.select()
         navigator.clipboard.writeText(text.value)
+        document.getSelection().removeAllRanges()
         props.showAlert("Text Copied","success")
 
     }
@@ -36,7 +37,8 @@ export default function TextForm(props) {
         setText(event.target.value)
     }
 
-    let wordCount = Text.split(" ").filter((e)=>{return e.length!==0}).length
+    let wordCount = Text.split(/\s+/).filter((e) => e.length !== 0).length
+    // let wordCount = Text.split(" ").filter((e)=>{return e.length!==0}).length
 
     return (
         <>
@@ -45,10 +47,10 @@ export default function TextForm(props) {
             <div className="mb-3">
                 <textarea className="form-control" placeholder='Enter Text Here!' value={Text} onChange={handleOnChange} id="textBox" rows="8" style={{backgroundColor:props.mode==='dark'?'#212529':'white', color:props.mode==='dark'?'#D0D2D6':'black' }}></textarea>
             </div>
-                <button className="btn btn-primary m-2" onClick={handleUpClick}>Convert to Uppercase</button>
-                <button className="btn btn-primary m-2" onClick={handleLoClick}>Convert to Lowercase</button>
-                <button className="btn btn-primary m-2" onClick={copyText}>Copy Text</button>
-                <button className="btn btn-danger m-2" onClick={handleClearClick}>Clear Text</button>
+                <button disabled={Text.length===0} className="btn btn-primary m-2" onClick={handleUpClick}>Convert to Uppercase</button>
+                <button disabled={Text.length===0} className="btn btn-primary m-2" onClick={handleLoClick}>Convert to Lowercase</button>
+                <button disabled={Text.length===0} className="btn btn-primary m-2" onClick={copyText}>Copy Text</button>
+                <button disabled={Text.length===0} className="btn btn-danger m-2" onClick={handleClearClick}>Clear Text</button>
 
         </div>
         <div className="container my-3" style={{color:props.mode==='dark'?'#D0D2D6':'black'}}>
@@ -58,7 +60,7 @@ export default function TextForm(props) {
         </div>
         <div className="container my-3" style={{color:props.mode==='dark'?'#D0D2D6':'black'}}>    
             <h4 className='my-3'>Preview</h4>
-            <p>{Text.length>0?Text:"Enter text above to preview it."}</p>
+            <p>{Text.length>0?Text:"Nothing to preview!"}</p>
         </div>
         </>
     )
